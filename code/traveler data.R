@@ -26,11 +26,4 @@ quest_travel %>%
   summarize(count=n())
 
 #based on destination counts, best regions to focus are East_Asia, EU_and_NA, 
-#mainland_China and SEA; 
-
-complete.cases(quest1)
-
-
-
-getwd()
-
+#mainland_China and SEA; should skip EU/NA because terrain and geographically very broad
