@@ -47,3 +47,32 @@ country_count <- quest2 %>%
   summarize(count=n())%>%
   arrange(desc(count)) %>%
   print(n=Inf)
+
+#add regions
+country_count_region <- quest2 %>%
+  filter(is.na(interchange) | interchange == '0') %>%
+  mutate(region=if_else(country == "Japan" | country == "Russia" | country == 'Taiwan' |
+                          country == 'South Korea' | country == 'Mongolia' , "East Asia", 
+                if_else(country == "Thailand" | country =='Malaysia' | country=='Singapore' | country == 'Vietnam' | country == 'Indonesia' | country =='Brunei' | country == 'Myanmar' | country == 'Philippines' | country == 'Shingapore', 'Southeast Asia', 
+                if_else(country=='Mainland China', 'China', 'Others'))))
+
+quest2 %>% group_by(id) %>% summarize(count=n())
+
+#no. of times people visited region, note total vist count is 131, which is 18 more than expected due to participants visiting multiple regions
+country_count_region %>%
+  group_by(id, region) %>%
+  summarize(count=n()) %>%
+  group_by(region) %>%
+  summarize(count=n())
+
+
+#Identifying participants that visited multiple regions
+country_count_region %>%
+  group_by(id, region) %>%
+  summarize(count=n()) %>%
+  group_by(id) %>%
+  summarize(duplicate = n()>1, region) %>%
+  filter(duplicate=='TRUE') %>%
+  group_by(id) %>%
+  summarize(count=n())
+
