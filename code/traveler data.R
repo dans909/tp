@@ -27,3 +27,23 @@ quest_travel %>%
 
 #based on destination counts, best regions to focus are East_Asia, EU_and_NA, 
 #mainland_China and SEA; should skip EU/NA because terrain and geographically very broad
+
+#Import country data
+quest2 <- read_excel('data/traveler_country_list.xlsx', skip = 0) 
+quest2 <- quest2 %>%
+  rename('id' = 'THID', 'country' = 'Countries', 
+         'city' = 'Cities', 
+         'interchange' = 'Interchange Airport')
+
+#Only look at countries for each ID
+quest2 %>%
+  group_by(id, country) %>%
+  summarize()
+
+#Eliminate interchange
+country_count <- quest2 %>%
+  filter(is.na(interchange) | interchange == '0') %>%
+  group_by(country) %>%
+  summarize(count=n())%>%
+  arrange(desc(count)) %>%
+  print(n=Inf)
