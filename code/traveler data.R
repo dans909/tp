@@ -48,6 +48,8 @@ country_count <- quest2 %>%
   arrange(desc(count)) %>%
   print(n=Inf)
 
+write_csv(country_count, "data/country_count.csv")
+
 #add regions
 country_count_region <- quest2 %>%
   filter(is.na(interchange) | interchange == '0') %>%
@@ -67,12 +69,13 @@ country_count_region %>%
 
 
 #Identifying participants that visited multiple regions
-country_count_region %>%
+id_multiple_region <- country_count_region %>%
   group_by(id, region) %>%
   summarize(count=n()) %>%
   group_by(id) %>%
   summarize(duplicate = n()>1, region) %>%
   filter(duplicate=='TRUE') %>%
   group_by(id) %>%
-  summarize(count=n())
+  summarize(region)
 
+write_csv(id_multiple_region, 'data/id_multiple_region.csv')

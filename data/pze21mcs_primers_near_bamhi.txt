@@ -1,0 +1,9 @@
+mice sera bact lps 
+kit
+
+
+Primer pair 10
+Sequence (5'->3')	Template strand	Length	Start	Stop	Tm	GC%	Self complementarity	Self 3' complementarity
+Forward primer	GACGCACTGACCGAATTCATTA	Plus	22	69	90	59.07	45.45	6.00	2.00
+Reverse primer	CGTTCACCGACAAACAACAGA	Minus	21	263	243	59.34	47.62	3.00	0.00
+Product length	195
